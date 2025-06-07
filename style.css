@@ -1,0 +1,114 @@
+ * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: url('/path/to/your/car-interior-bg.jpg') center/cover no-repeat;
+      color: #333;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 30px;
+      border-radius: 8px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #d1245b;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 500;
+      margin-top: 15px;
+      color: #d1245b;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    input[type=file] {
+      padding: 6px;
+      font-size: 13px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .half {
+      width: 48%;
+      float: left;
+    }
+
+    .half+.half {
+      margin-left: 4%;
+    }
+
+    .clearfix::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    .terms-box {
+      border: 1px solid #d1245b;
+      padding: 10px;
+      border-radius: 4px;
+      margin-top: 6px;
+      background: #fff;
+      max-height: 150px;
+      overflow-y: auto;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .checkbox {
+      margin: 12px 0;
+    }
+
+    .checkbox input {
+      width: auto;
+      margin-right: 8px;
+    }
+
+    .btn-submit {
+      display: block;
+      background: #d1245b;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .btn-submit:hover {
+      background: #b71c48;
+    }
+
+    @media (max-width: 600px) {
+      .half {
+        width: 100%;
+        margin-left: 0;
+      }
+    }
+  
