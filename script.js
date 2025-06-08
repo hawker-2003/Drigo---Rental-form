@@ -1,4 +1,7 @@
 // Signature Pad Setup
+document.addEventListener("DOMContentLoaded", function ()
+
+
 const signaturePad = document.getElementById("signature-pad");
 const ctx = signaturePad.getContext("2d");
 let isDrawing = false;
@@ -80,4 +83,5 @@ document.getElementById("rental-form").addEventListener("submit", async function
     console.error("Error submitting form:", err);
     alert("Error: " + err.message);
   }
+});
 });
