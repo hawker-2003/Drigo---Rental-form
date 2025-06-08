@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    // Upload all files to Cloudinary
+    // Upload files to Cloudinary
     const license = await uploadFile(form.license_file.files[0]);
     const aadharFront = await uploadFile(form.aadhar_front.files[0]);
     const aadharBack = await uploadFile(form.aadhar_back.files[0]);
@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
       email: form.email.value,
       phone: form.phone.value,
       pickup_datetime: form.pickup_datetime.value,
+      end_datetime: form.end_datetime.value, // Added end date-time
       street: form.street.value,
       address2: form.address2.value,
       city: form.city.value,
@@ -42,9 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
       pan_file_url: pan
     };
 
-    // Send to Google Apps Script
+    // Submit to Google Apps Script
     try {
-      const response = await fetch("YOUR_GOOGLE_SCRIPT_URL", {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbxaELEu-_gBaQ8-FjYko-pdmQOqu00vBa9JB66kYLm9EThU7oBwWRg8fHL31U6Zb1P6/exec", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -68,11 +69,12 @@ document.addEventListener("DOMContentLoaded", () => {
 async function uploadFile(file) {
   const fd = new FormData();
   fd.append("file", file);
-  fd.append("upload_preset", "YOUR_UPLOAD_PRESET"); // 🔁 Replace
-  const res = await fetch("https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/upload", {
+  fd.append("upload_preset", "drigo_upload"); // ✅ Your actual preset name
+  const res = await fetch("https://api.cloudinary.com/v1_1/dugsmijh5/upload", { // ✅ Your actual cloud name
     method: "POST",
     body: fd
   });
   const json = await res.json();
   return json.secure_url;
 }
+
