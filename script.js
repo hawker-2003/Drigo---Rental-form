@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
         pan_file_url: pan
       };
 
-      const response = await fetch("https://script.google.com/macros/s/AKfycbxaELEu-_gBaQ8-FjYko-pdmQOqu00vBa9JB66kYLm9EThU7oBwWRg8fHL31U6Zb1P6/exec", {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbyylByJqwrnsvlDFNSxLmOLobM91htv7ms5TLNZvC8DViQBVaBFYzd1poSLZGn_fzkJ/exec", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
