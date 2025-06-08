@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const ctx = canvas.getContext("2d");
   let drawing = false;
 
-  // Initialize signature pad
   const getPos = (e) => {
     const rect = canvas.getBoundingClientRect();
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -50,16 +49,12 @@ document.addEventListener("DOMContentLoaded", () => {
   canvas.addEventListener("touchend", stopDrawing);
   window.clearSignature = clearSignature;
 
-  // Prevent past date/time
   const now = new Date();
   now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
   const minTime = now.toISOString().slice(0, 16);
-  const pickup = form.querySelector("[name='pickup_datetime']");
-  const end = form.querySelector("[name='end_datetime']");
-  if (pickup) pickup.min = minTime;
-  if (end) end.min = minTime;
+  form.pickup_datetime.min = minTime;
+  form.end_datetime.min = minTime;
 
-  // File upload to Cloudinary
   async function uploadFile(file) {
     const fd = new FormData();
     fd.append("file", file);
@@ -67,14 +62,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const res = await fetch("https://api.cloudinary.com/v1_1/dugsmijh5/upload", {
       method: "POST",
-      body: fd,
+      body: fd
     });
 
     const json = await res.json();
     return json.secure_url;
   }
 
-  // Upload signature canvas to Cloudinary
   async function uploadSignature() {
     const dataURL = canvas.toDataURL("image/png");
     const blob = await (await fetch(dataURL)).blob();
@@ -92,7 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return json.secure_url;
   }
 
-  // Form submit
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -139,11 +132,11 @@ document.addEventListener("DOMContentLoaded", () => {
         form.reset();
         clearSignature();
       } else {
-        alert("Submission failed. Try again.");
+        alert("Submission failed. Please try again.");
       }
     } catch (err) {
-      console.error("Error:", err);
-      alert("Something went wrong. Please check your internet or inputs.");
+      console.error("Submission Error:", err);
+      alert("Something went wrong. Check console or try again.\n" + err.message);
     }
   });
 });
