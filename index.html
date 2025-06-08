@@ -54,38 +54,23 @@
       <div class="row">
         <div>
           <label>Pickup Date & Time</label>
-          <input type="datetime-local" name="pickup_datetime" id="pickup_datetime" required>
+          <input type="datetime-local" name="pickup_datetime" required>
         </div>
         <div>
           <label>End Date & Time</label>
-          <input type="datetime-local" name="end_datetime" id="end_datetime" required>
+          <input type="datetime-local" name="end_datetime" required>
         </div>
       </div>
 
       <!-- Documents -->
-     
-
-
-<!-- Driving Licence (Upload) -->
-<label>Driving Licence (Upload)</label>
-<input type="file" name="license_file" id="license_file" required>
-
-<!-- Aadhar Card (Front) -->
-<label>Aadhar Card (Front)</label>
-<input type="file" name="aadhar_front" id="aadhar_front" required>
-
-<!-- Aadhar Card (Back) -->
-<label>Aadhar Card (Back)</label>
-<input type="file" name="aadhar_back" id="aadhar_back" required>
-
-<!-- PAN Card -->
-<label>PAN Card</label>
-<input type="file" name="pan_file" id="pan_file" required>
-
-<!-- Everything else stays the same -->
-
-<!-- Make sure this is included at the end of body -->
-<script src="script.js"></script>
+      <label>Driving Licence</label>
+      <input type="file" name="license_file" required>
+      <label>Aadhar Card (Front)</label>
+      <input type="file" name="aadhar_front" required>
+      <label>Aadhar Card (Back)</label>
+      <input type="file" name="aadhar_back" required>
+      <label>PAN Card</label>
+      <input type="file" name="pan_file" required>
 
       <div class="row">
         <input type="text" name="license_number" placeholder="Driving License Number" required>
@@ -105,9 +90,9 @@
 
       <!-- Signature -->
       <label>Digital Signature</label>
-      <canvas id="signature-pad" width="500" height="200" style="border:1px solid #ccc; background:#fff; display: block; margin-bottom: 10px;"></canvas>
+      <canvas id="signature-pad" width="500" height="200" style="border:1px solid #ccc;"></canvas>
       <input type="hidden" name="signature_url" id="signature-url" />
-      <button type="button" onclick="clearSignature()" style="margin-bottom: 20px;">Clear Signature</button>
+      <button type="button" onclick="clearSignature()">Clear Signature</button>
 
       <!-- Car Info -->
       <div class="clearfix">
@@ -125,9 +110,8 @@
     </form>
   </div>
 
-  <!-- Scripts -->
-
   <script src="script.js"></script>
 </body>
 </html>
+
 
