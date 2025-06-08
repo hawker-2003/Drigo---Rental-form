@@ -1,114 +1,146 @@
- * {
-      box-sizing: border-box;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: url('/path/to/your/car-interior-bg.jpg') center/cover no-repeat;
-      color: #333;
-    }
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #f9f9f9;
+  color: #333;
+}
 
-    .container {
-      max-width: 600px;
-      margin: 40px auto;
-      background: rgba(255, 255, 255, 0.85);
-      padding: 30px;
-      border-radius: 8px;
-    }
+.container {
+  max-width: 650px;
+  margin: 40px auto;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
 
-    h1 {
-      text-align: center;
-      color: #d1245b;
-      margin-bottom: 20px;
-    }
+h1 {
+  text-align: center;
+  color: #d1245b;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
 
-    label {
-      display: block;
-      font-weight: 500;
-      margin-top: 15px;
-      color: #d1245b;
-    }
+label {
+  display: block;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  color: #d1245b;
+  font-weight: 500;
+  font-size: 14px;
+}
 
-    input,
-    textarea,
-    select {
-      width: 100%;
-      padding: 10px 12px;
-      margin-top: 6px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 14px;
-      font-family: inherit;
-    }
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #fff;
+}
 
-    input[type=file] {
-      padding: 6px;
-      font-size: 13px;
-    }
+input[type="file"] {
+  padding: 6px;
+  font-size: 13px;
+}
 
-    textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
 
-    .half {
-      width: 48%;
-      float: left;
-    }
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
 
-    .half+.half {
-      margin-left: 4%;
-    }
+.half {
+  width: 48%;
+  float: left;
+  margin-top: 0;
+}
 
-    .clearfix::after {
-      content: "";
-      display: table;
-      clear: both;
-    }
+.half + .half {
+  margin-left: 4%;
+}
 
-    .terms-box {
-      border: 1px solid #d1245b;
-      padding: 10px;
-      border-radius: 4px;
-      margin-top: 6px;
-      background: #fff;
-      max-height: 150px;
-      overflow-y: auto;
-      font-size: 14px;
-      color: #333;
-    }
+.btn-submit {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: #d1245b;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  margin-top: 25px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
 
-    .checkbox {
-      margin: 12px 0;
-    }
+.btn-submit:hover {
+  background: #b71c48;
+}
 
-    .checkbox input {
-      width: auto;
-      margin-right: 8px;
-    }
+.terms-box {
+  border: 1px solid #d1245b;
+  background: #fff;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  max-height: 150px;
+  overflow-y: auto;
+}
 
-    .btn-submit {
-      display: block;
-      background: #d1245b;
-      color: #fff;
-      border: none;
-      padding: 12px;
-      font-size: 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-top: 20px;
-      width: 100%;
-    }
+.checkbox {
+  margin: 14px 0;
+}
 
-    .btn-submit:hover {
-      background: #b71c48;
-    }
+.checkbox input {
+  width: auto;
+  margin-right: 8px;
+}
 
-    @media (max-width: 600px) {
-      .half {
-        width: 100%;
-        margin-left: 0;
-      }
-    }
-  
+canvas#signature-pad {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  min-height: 180px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 6px;
+  margin-top: 10px;
+  touch-action: none;
+}
+
+/* ✅ Mobile fixes */
+@media (max-width: 700px) {
+  .half {
+    width: 100%;
+    margin-left: 0 !important;
+    margin-bottom: 20px;
+  }
+
+  .container {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  canvas#signature-pad {
+    height: 200px;
+  }
+
+  label {
+    font-size: 13px;
+  }
+}
+
