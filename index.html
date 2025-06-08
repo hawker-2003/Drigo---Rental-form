@@ -93,15 +93,24 @@
       </div>
 
       <!-- Signature -->
-      <label>Digital Signature</label>
-      <canvas id="signature-pad"></canvas>
-      <input type="hidden" name="signature_url" id="signature-url">
-      <button type="button" onclick="clearSignature()">Clear Signature</button>
+     <!-- Digital Signature Section -->
+<label for="signature">Digital Signature</label>
+<canvas id="signature-pad" width="500" height="200" style="border:1px solid #ccc; background:#fff; display: block; margin-bottom: 10px;"></canvas>
+<input type="hidden" name="signature_url" id="signature-url" />
+<button type="button" onclick="clearSignature()" style="margin-bottom: 20px;">Clear Signature</button>
 
-      <div class="row">
-        <input type="text" name="car_model" placeholder="Car Model" required>
-        <input type="text" name="plate_number" placeholder="License Plate No." required>
-      </div>
+<!-- Car Info Section -->
+<div class="clearfix">
+  <div class="half">
+    <label>Car Model *</label>
+    <input type="text" name="car_model" required>
+  </div>
+  <div class="half">
+    <label>Car License Plate Number *</label>
+    <input type="text" name="plate_number" required>
+  </div>
+</div>
+
 
       <button type="submit" class="btn-submit">Submit</button>
     </form>
