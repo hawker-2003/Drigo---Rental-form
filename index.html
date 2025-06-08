@@ -63,17 +63,29 @@
       </div>
 
       <!-- Documents -->
-      <label>Driving Licence (Upload)</label>
-      <input type="file" name="license_file" required>
+     
 
-      <label>Aadhar Card (Front)</label>
-      <input type="file" name="aadhar_front" required>
 
-      <label>Aadhar Card (Back)</label>
-      <input type="file" name="aadhar_back" required>
+<!-- Driving Licence (Upload) -->
+<label>Driving Licence (Upload)</label>
+<input type="file" name="license_file" id="license_file" required>
 
-      <label>PAN Card</label>
-      <input type="file" name="pan_file" required>
+<!-- Aadhar Card (Front) -->
+<label>Aadhar Card (Front)</label>
+<input type="file" name="aadhar_front" id="aadhar_front" required>
+
+<!-- Aadhar Card (Back) -->
+<label>Aadhar Card (Back)</label>
+<input type="file" name="aadhar_back" id="aadhar_back" required>
+
+<!-- PAN Card -->
+<label>PAN Card</label>
+<input type="file" name="pan_file" id="pan_file" required>
+
+<!-- Everything else stays the same -->
+
+<!-- Make sure this is included at the end of body -->
+<script src="script.js"></script>
 
       <div class="row">
         <input type="text" name="license_number" placeholder="Driving License Number" required>
