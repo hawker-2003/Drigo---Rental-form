@@ -2,46 +2,48 @@ const canvas = document.getElementById("signature-pad");
 const ctx = canvas.getContext("2d");
 let drawing = false;
 
-const getPosition = (e) => {
+const getPos = (e) => {
   const rect = canvas.getBoundingClientRect();
-  return {
-    x: (e.touches ? e.touches[0].clientX : e.clientX) - rect.left,
-    y: (e.touches ? e.touches[0].clientY : e.clientY) - rect.top
-  };
+  const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+  const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+  return { x: clientX - rect.left, y: clientY - rect.top };
 };
 
-const startDrawing = (e) => {
+canvas.addEventListener("mousedown", (e) => {
   drawing = true;
-  const pos = getPosition(e);
+  const pos = getPos(e);
   ctx.beginPath();
   ctx.moveTo(pos.x, pos.y);
-  e.preventDefault();
-};
-
-const draw = (e) => {
+});
+canvas.addEventListener("mousemove", (e) => {
   if (!drawing) return;
-  const pos = getPosition(e);
+  const pos = getPos(e);
+  ctx.lineTo(pos.x, pos.y);
+  ctx.stroke();
+});
+canvas.addEventListener("mouseup", () => {
+  drawing = false;
+  document.getElementById("signature-url").value = canvas.toDataURL();
+});
+canvas.addEventListener("mouseout", () => (drawing = false));
+
+// Mobile Support
+canvas.addEventListener("touchstart", (e) => {
+  drawing = true;
+  const pos = getPos(e);
+  ctx.beginPath();
+  ctx.moveTo(pos.x, pos.y);
+});
+canvas.addEventListener("touchmove", (e) => {
+  const pos = getPos(e);
   ctx.lineTo(pos.x, pos.y);
   ctx.stroke();
   e.preventDefault();
-};
-
-const stopDrawing = (e) => {
-  if (drawing) {
-    drawing = false;
-    document.getElementById("signature-url").value = canvas.toDataURL();
-  }
-  e.preventDefault();
-};
-
-canvas.addEventListener("mousedown", startDrawing);
-canvas.addEventListener("mousemove", draw);
-canvas.addEventListener("mouseup", stopDrawing);
-canvas.addEventListener("mouseout", stopDrawing);
-
-canvas.addEventListener("touchstart", startDrawing, { passive: false });
-canvas.addEventListener("touchmove", draw, { passive: false });
-canvas.addEventListener("touchend", stopDrawing, { passive: false });
+});
+canvas.addEventListener("touchend", () => {
+  drawing = false;
+  document.getElementById("signature-url").value = canvas.toDataURL();
+});
 
 function clearSignature() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
