@@ -3,15 +3,14 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>DriGo India Cars Pvt. Ltd Car Rental Agreement</title>
+  <title>DriGo Car Rental Agreement</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
     <h1>DriGo India Cars Pvt. Ltd Car Rental Agreement</h1>
-   <form id="rental-form" enctype="multipart/form-data" method="POST">
-      
+    <form id="rental-form">
       <!-- Name -->
       <label>Name</label>
       <div class="row">
@@ -55,11 +54,11 @@
       <div class="row">
         <div>
           <label>Pickup Date & Time</label>
-          <input type="datetime-local" name="pickup_datetime" required>
+          <input type="datetime-local" name="pickup_datetime" id="pickup_datetime" required>
         </div>
         <div>
           <label>End Date & Time</label>
-          <input type="datetime-local" name="end_datetime" required>
+          <input type="datetime-local" name="end_datetime" id="end_datetime" required>
         </div>
       </div>
 
@@ -93,34 +92,30 @@
       </div>
 
       <!-- Signature -->
-     <!-- Digital Signature Section -->
-<label for="signature">Digital Signature</label>
-<canvas id="signature-pad" width="500" height="200" style="border:1px solid #ccc; background:#fff; display: block; margin-bottom: 10px;"></canvas>
-<input type="hidden" name="signature_url" id="signature-url" />
-<button type="button" onclick="clearSignature()" style="margin-bottom: 20px;">Clear Signature</button>
+      <label>Digital Signature</label>
+      <canvas id="signature-pad" width="500" height="200" style="border:1px solid #ccc; background:#fff; display: block; margin-bottom: 10px;"></canvas>
+      <input type="hidden" name="signature_url" id="signature-url" />
+      <button type="button" onclick="clearSignature()" style="margin-bottom: 20px;">Clear Signature</button>
 
-<!-- Car Info Section -->
-<div class="clearfix">
-  <div class="half">
-    <label>Car Model *</label>
-    <input type="text" name="car_model" required>
-  </div>
-  <div class="half">
-    <label>Car License Plate Number *</label>
-    <input type="text" name="plate_number" required>
-  </div>
-</div>
-
+      <!-- Car Info -->
+      <div class="clearfix">
+        <div class="half">
+          <label>Car Model *</label>
+          <input type="text" name="car_model" required>
+        </div>
+        <div class="half">
+          <label>Car License Plate Number *</label>
+          <input type="text" name="plate_number" required>
+        </div>
+      </div>
 
       <button type="submit" class="btn-submit">Submit</button>
     </form>
   </div>
-  <script src="script.js"></script>
-  <script src="signature-pad.js"></script>
-  
-  
 
+  <!-- Scripts -->
+  <script src="signature-pad.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
-
 
