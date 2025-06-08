@@ -1,10 +1,9 @@
-// === Initialize canvas drawing and upload functionality ===
+// === Initialize Signature Pad ===
 window.addEventListener("load", () => {
   const canvas = document.getElementById("signature-pad");
   const ctx = canvas.getContext("2d");
   let drawing = false;
 
-  // Get position for both mouse and touch
   const getPos = (e) => {
     const rect = canvas.getBoundingClientRect();
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -12,7 +11,6 @@ window.addEventListener("load", () => {
     return { x: clientX - rect.left, y: clientY - rect.top };
   };
 
-  // Start drawing
   const startDrawing = (e) => {
     drawing = true;
     const pos = getPos(e);
@@ -20,7 +18,6 @@ window.addEventListener("load", () => {
     ctx.moveTo(pos.x, pos.y);
   };
 
-  // Draw line
   const draw = (e) => {
     if (!drawing) return;
     const pos = getPos(e);
@@ -29,23 +26,19 @@ window.addEventListener("load", () => {
     ctx.lineWidth = 2;
     ctx.lineCap = "round";
     ctx.stroke();
-    if (e.touches) e.preventDefault(); // prevent scrolling on touch
+    if (e.touches) e.preventDefault();
   };
 
-  // Stop drawing
   const stopDrawing = () => {
     drawing = false;
     ctx.closePath();
     document.getElementById("signature-url").value = canvas.toDataURL();
   };
 
-  // Event Listeners for desktop
   canvas.addEventListener("mousedown", startDrawing);
   canvas.addEventListener("mousemove", draw);
   canvas.addEventListener("mouseup", stopDrawing);
   canvas.addEventListener("mouseout", stopDrawing);
-
-  // Event Listeners for mobile
   canvas.addEventListener("touchstart", startDrawing);
   canvas.addEventListener("touchmove", draw);
   canvas.addEventListener("touchend", stopDrawing);
@@ -55,8 +48,8 @@ window.addEventListener("load", () => {
 async function uploadSignature() {
   const canvas = document.getElementById("signature-pad");
   const dataURL = canvas.toDataURL("image/png");
-
   const blob = await (await fetch(dataURL)).blob();
+
   const fd = new FormData();
   fd.append("file", blob, "signature.png");
   fd.append("upload_preset", "drigo_upload");
@@ -70,7 +63,6 @@ async function uploadSignature() {
   return json.secure_url;
 }
 
-// === Clear signature canvas
 function clearSignature() {
   const canvas = document.getElementById("signature-pad");
   const ctx = canvas.getContext("2d");
