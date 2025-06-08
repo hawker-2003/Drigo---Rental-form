@@ -146,14 +146,14 @@ form.addEventListener("submit", async (e) => {
     console.log("Response from GAS:", result);
 
     if (res.ok) {
-      alert("✅ Booking submitted successfully!");
+      alert(" Booking submitted successfully!");
       form.reset();
       clearSignature();
     } else {
-      alert("❌ Submission failed. Please try again.");
+      alert(" Submission failed. Please try again.");
     }
   } catch (err) {
-    console.error("🚨 Submission Error:", err);
-    alert(❌ Something went wrong. Check console or try again.\n${err.message});
+    console.error(" Submission Error:", err);
+    alert("Something went wrong. Check console or try again.");
   }
 });
