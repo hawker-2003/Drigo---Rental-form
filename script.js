@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fd.append("file", file);
     fd.append("upload_preset", "drigo_upload");
 
-    const res = await fetch("https://api.cloudinary.com/v1_1/dugsmijh5/upload", {
+    const res = await fetch("https://api.cloudinary.com/v1_1/dugsmjih5/upload", {
       method: "POST",
       body: fd
     });
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fd.append("file", blob, "signature.png");
     fd.append("upload_preset", "drigo_upload");
 
-    const res = await fetch("https://api.cloudinary.com/v1_1/dugsmijh5/upload", {
+    const res = await fetch("https://api.cloudinary.com/v1_1/dugsmjih5/upload", {
       method: "POST",
       body: fd
     });
