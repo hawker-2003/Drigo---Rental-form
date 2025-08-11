@@ -1,5 +1,5 @@
+<script>
 document.addEventListener("DOMContentLoaded", function () {
-
   const signaturePad = document.getElementById("signature-pad");
   const ctx = signaturePad.getContext("2d");
   let isDrawing = false;
@@ -19,50 +19,59 @@ document.addEventListener("DOMContentLoaded", function () {
   signaturePad.addEventListener("mouseup", () => isDrawing = false);
   signaturePad.addEventListener("mouseleave", () => isDrawing = false);
 
-  // Touch events (mobile)
+  // Touch events
   signaturePad.addEventListener("touchstart", (e) => {
     e.preventDefault();
-    const touch = e.touches[0];
     const rect = signaturePad.getBoundingClientRect();
-    isDrawing = true;
     ctx.beginPath();
-    ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
+    ctx.moveTo(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top);
+    isDrawing = true;
   });
   signaturePad.addEventListener("touchmove", (e) => {
     e.preventDefault();
     if (isDrawing) {
-      const touch = e.touches[0];
       const rect = signaturePad.getBoundingClientRect();
-      ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+      ctx.lineTo(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top);
       ctx.stroke();
     }
   });
   signaturePad.addEventListener("touchend", () => isDrawing = false);
 
   // Clear signature
-  function clearSignature() {
+  document.getElementById("clear-signature").addEventListener("click", () => {
     ctx.clearRect(0, 0, signaturePad.width, signaturePad.height);
+  });
+
+  // Convert file to Base64
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(",")[1]); // Remove data URL prefix
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(file);
+    });
   }
 
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzhE0tDEuElWdLcUwMO9ZOs9r-XP-1XTTn1_66VMdt4XqZ2Qx1I5B6VrbApRDsFzvzU/exec";
-
+  // Submit form
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbybxt4RMSy3jGkh17S8ekNDNwBjNw4g9pDFxmWQYF3xsFVkpJLM_OZlSnL22OFvLqtW/exec"; // Replace with your Apps Script URL
   document.getElementById("rental-form").addEventListener("submit", async function (e) {
     e.preventDefault();
 
     const form = e.target;
     const data = Object.fromEntries(new FormData(form).entries());
 
-    // Signature as image
-    const signatureURL = signaturePad.toDataURL();
-    data.signature_url = signatureURL;
+    // Convert signature to Base64
+    data.signature_url = signaturePad.toDataURL("image/png").split(",")[1];
 
-    // Required files
+    // Required file fields
     const fileFields = [
       { name: "license_file", label: "Driving License" },
       { name: "aadhar_front", label: "Aadhar Front" },
       { name: "aadhar_back", label: "Aadhar Back" },
       { name: "pan_file", label: "PAN Card" }
     ];
+
+    // Validate file uploads
     for (let field of fileFields) {
       const fileInput = form.querySelector(`[name="${field.name}"]`);
       if (!fileInput || fileInput.files.length === 0) {
@@ -71,26 +80,24 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    try {
-      const formData = new FormData();
-      for (const pair of Object.entries(data)) {
-        formData.append(pair[0], pair[1]);
-      }
-      fileFields.forEach(field => {
-        const fileInput = form.querySelector(`[name="${field.name}"]`);
-        formData.append(field.name, fileInput.files[0]);
-      });
+    // Convert files to Base64
+    for (let field of fileFields) {
+      const fileInput = form.querySelector(`[name="${field.name}"]`);
+      data[field.name] = await fileToBase64(fileInput.files[0]);
+    }
 
+    // Send data
+    try {
       const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
-        body: formData,
+        body: new URLSearchParams(data), // URL-encoded form data
       });
 
       const result = await response.json();
       if (result.status === "success") {
         alert("Form submitted successfully!");
         form.reset();
-        clearSignature();
+        ctx.clearRect(0, 0, signaturePad.width, signaturePad.height);
       } else {
         alert("Form submission failed: " + result.message);
       }
@@ -99,5 +106,6 @@ document.addEventListener("DOMContentLoaded", function () {
       alert("Error: " + err.message);
     }
   });
-
 });
+</script>
+
